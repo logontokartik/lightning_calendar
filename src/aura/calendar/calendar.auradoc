@@ -1,0 +1,21 @@
+<aura:documentation >
+	<aura:description>
+		<p><code>calendar</code>Lightning Component is fully customizable, and can be used with any Salesforce object, that has a date field. Drop it on a Lightning App or make it as a Tab on your Salesforce1 Mobile.</p>
+		<p>It includes various customizations like color of the event, end dates, isRecurring, display fields, and also specify filter clauses.</p>
+    	<pre>
+                    &lt;stech:calendar objectName=&quot;Campaign&quot; 
+                                    startDateField=&quot;StartDate&quot;
+                                    endDateField=&quot;EndDate&quot;
+                                    titleField=&quot;Name&quot;
+                                    color=&quot;gray&quot;
+                                    pageTitle=&quot;Campaign Events&quot;
+                                    fieldsToDisplayCSV=&quot;Description,Status&quot;/&gt;
+                    
+        </pre>
+    </aura:description>
+	<aura:example name="calendarExample" ref="stech:sampleComp" label="Customizing stech:calendar">
+		<p>This example shows how you can customize calendar component 
+            <code>calendar</code>.
+        </p>
+	</aura:example>
+</aura:documentation>

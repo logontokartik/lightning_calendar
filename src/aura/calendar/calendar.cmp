@@ -1,0 +1,106 @@
+<aura:component controller="stech.CalendarController" implements="force:appHostable" access="global">
+
+    <aura:attribute name="objectName"
+        required="true"
+        type="String"
+        access="global"            
+        description="Name of the sObject that will be filtered" />
+
+    <aura:attribute name="pageTitle"
+        type="String"
+        default=""
+        access="global"                    
+        description="The Page Title"/>
+
+    <aura:attribute name="titleField"
+        type="String"
+        default=""
+        access="global"                    
+        description="Title field that is displayed on the calendar"/>
+
+    <aura:attribute name="startDateField"
+        required="true"            
+        type="String"
+        default=""
+        access="global"                    
+        description="Date field on object that needs to be retrievd as start date"/>
+
+    <aura:attribute name="endDateField"
+        type="String"
+        default=""
+        access="global"                    
+        description="Date field on object that needs to be retrievd as end date"/>
+
+  <aura:attribute name="recurringYearly"
+        type="boolean"
+        default="false"
+        access="global"                  
+        description="If the event is recurring every year like birth date"/>
+
+    <aura:attribute name="color"
+        type="String"
+        default=""
+        access="global"                    
+        description="Calendar Event color"/>
+
+    <aura:attribute name="fieldsToDisplayCSV"
+        type="String"
+        default=""
+        access="global"                    
+        description="List of fields to display on click of calendar event"/>
+
+    <aura:attribute name="filterCondition"
+        type="String"
+        default=""
+        access="global"                    
+        description="Where clause filter for query (do not include where)"/>
+
+    <aura:attribute name="calendarStyleClass"
+        type="String"
+        default=""
+        access="global"                    
+        description="The Calendar Class for spl styling"/>
+
+    <aura:attribute name="ready"
+        type="Boolean"
+        default="false"
+        access="global"                    
+        description="Used to check if resources have been loaded"/>
+
+    <!-- use the requires to load the libraries -->
+    <stech:requires
+        baseUrl="/resource/"
+        scripts="{moment:'fullcalendar/deps/moment.min.js',
+                  jquery:'fullcalendar/deps/jquery.min.js',
+                  jqueryui: 'fullcalendar/deps/jquery-ui.custom.min.js',
+                  calendar: 'fullcalendar/fullcalendar/fullcalendar.min.js',
+                  bootstrapjs: 'fullcalendar/deps/bootstrap.min.js'}"
+        deps="{jqueryui:['jquery','bootstrapjs']}"
+        styles="{fullcalendar:'fullcalendar/fullcalendar/fullcalendar.min.css',
+                fullcalendar_print:'fullcalendar/fullcalendar/fullcalendar.min.css',
+                jqueryui:'fullcalendar/fullcalendar/jquery-ui.theme.min.css',
+                bootstrap: 'fullcalendar/fullcalendar/bootstrap.min.css'}"
+        requiresReady="c.init"
+    />
+    <div>
+        <div id="loading" style="display:none;" class="text-center">Loading...</div>
+        <div id="calendarModal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                        <h4 id="modalTitle" class="modal-title"></h4>
+                    </div>
+                    <div id="modalBody" class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <!--TODO Need to know if we need to redirect to a detail page -->
+                        <!--<button class="btn btn-primary"></button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center"><h2 style="color:#1b809e;">{!v.pageTitle}</h2></div>&nbsp;
+        <div id="calendarComp" class="{!v.calendarStyleClass}"></div>
+    </div>
+</aura:component>
